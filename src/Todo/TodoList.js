@@ -10,9 +10,19 @@ const TodoList = () => {
   function addTask(tasks) {
     let id = Date.now();
     const newTodo = { ...tasks, id };
-    setTask([...task, newTodo]);
+    let newTask = [...task, newTodo];
+    setTask(newTask);
+    //setting to locastorage
+    localStorage.setItem("data", JSON.stringify(newTask));
   }
 
+  // getting data from the locastorage
+  useEffect(() => {
+    let savedData = localStorage.getItem("data");
+    if (savedData) {
+      setTask(savedData);
+    }
+  }, []);
   /// delete task
   function handleDelete(id) {
     if (window.confirm("Are sure to delete it")) {
