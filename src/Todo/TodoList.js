@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import { FaTrash } from "react-icons/fa";
 import Form from "./Form";
 import todos from "./TodoData";
@@ -18,10 +18,12 @@ const TodoList = () => {
 
   // getting data from the locastorage
   useEffect(() => {
-    let savedData = localStorage.getItem("data");
-    if (savedData) {
-      setTask(savedData);
-    }
+   
+   let savedData = localStorage.getItem("data");
+     if (savedData) {
+      setTask(JSON.parse(savedData));
+     } 
+
   }, []);
   /// delete task
   function handleDelete(id) {
